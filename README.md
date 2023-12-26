@@ -1,36 +1,28 @@
-# Pipi Caca Bot pour Discord
-Le Pipi Caca Bot est un bot Discord amusant et interactif qui permet aux utilisateurs de compter les occurrences de "pipi" et "caca" dans les messages, et de voir des classements des utilisateurs.
+# Pipi Caca Bot for Discord
+The Pipi Caca Bot is a fun and interactive Discord bot that allows users to count occurrences of "pipi" and "caca" in messages and view user rankings.
 
-# Installation
-## Prérequis
-Docker et Docker Compose
-Node.js
-Un token de bot Discord
-## Configuration
+## Installation
+### Prerequisites
+- Docker and Docker Compose
+- Node.js
+- A Discord bot token
 
-# Configurez les variables d'environnement :
+### Configuration
 
-Créez un fichier .env à la racine du projet et ajoutez votre token de bot Discord :
+#### Set Up Environment Variables:
+Create a `.env` file at the root of the project and add your Discord bot token:
 
-```Copy code
-DISCORD_TOKEN=votre_token_discord
+```
+DISCORD_TOKEN=your_discord_token
 ```
 
-# Construire et Démarrer les Services avec Docker Compose :
-## À la racine de votre projet, exécutez :
+#Build and Start Services with Docker Compose:
+
+At the root of your project, execute:
 
 ```
 cd src
 npm i
 cd ..
 docker-compose up --build
-``
-
-Vérification :
-Après le démarrage des services, votre bot devrait être en ligne sur votre serveur Discord. Testez les commandes pour vous assurer que tout fonctionne correctement.
-
-Commandes du Bot
-!caca : Enregistre une occurrence de "caca".
-!pipi : Enregistre une occurrence de "pipi".
-!top : Affiche le classement combiné de "pipi" et "caca".
-!top pipi ou !top caca : Affiche un classement spécifique pour "pipi" ou "caca".
+```
