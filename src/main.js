@@ -11,12 +11,11 @@ const client = new Client({
 
 const pool = new Pool({
     user: 'utilisateur',
-    host: 'db', // Utilisez localhost ici
+    host: 'db', 
     database: 'monbotdb',
     password: 'motdepasse',
     port: 5432,
 });
-
 
 client.on('ready', () => {
     console.log(`Connecté en tant que ${client.user.tag}!`);
@@ -32,12 +31,12 @@ client.on('messageCreate', async message => {
             const query = 'INSERT INTO pipi_caca (type, username, date) VALUES ($1, $2, $3)';
             await pool.query(query, [type, username, date]);
             console.log(`${type} enregistré pour ${username} à ${date}`);
-            message.channel.send (`${type} rajouter à ${username}`)
+            message.channel.send(`${type} ajouté pour ${username}`);
         } catch (err) {
             console.error('Erreur lors de l\'insertion dans la base de données', err);
         }
-    }else if (message.content.startsWith('!info') && !message.author.bot) {
-        const usernameQuery = message.content.split(" ")[1]; // Extrait le nom d'utilisateur de la commande
+    } else if (message.content.startsWith('!info') && !message.author.bot) {
+        const usernameQuery = message.content.split(" ")[1];
         if (!usernameQuery) {
             message.channel.send("Veuillez spécifier un nom d'utilisateur.");
             return;
@@ -56,7 +55,7 @@ client.on('messageCreate', async message => {
             message.channel.send("Une erreur s'est produite lors de la récupération des informations.");
         }
 
-    }else if (message.content.startsWith('!top') && !message.author.bot) {
+    } else if (message.content.startsWith('!top') && !message.author.bot) {
         const args = message.content.split(" ");
         let query;
         let leaderboardMessage;
@@ -64,12 +63,12 @@ client.on('messageCreate', async message => {
         if (args.length === 1 || (args[1] !== 'pipi' && args[1] !== 'caca')) {
             // Classement combiné pour pipi et caca
             query = 'SELECT username, COUNT(*) as count FROM pipi_caca GROUP BY username ORDER BY count DESC LIMIT 3';
-            leaderboardMessage = `Top 3 combiné:\n`;
+            leaderboardMessage = `Top 3 combiné :\n`;
         } else {
             // Classement spécifique pour pipi ou caca
             const typeQuery = args[1];
             query = 'SELECT username, COUNT(*) as count FROM pipi_caca WHERE type = $1 GROUP BY username ORDER BY count DESC LIMIT 3';
-            leaderboardMessage = `Top 3 ${typeQuery}:\n`;
+            leaderboardMessage = `Top 3 ${typeQuery} :\n`;
         }
 
         try {
@@ -83,9 +82,6 @@ client.on('messageCreate', async message => {
             message.channel.send("Une erreur s'est produite lors de la récupération du classement.");
         }
     }
-
-
-    
 });
 
 client.login(process.env.DISCORD_TOKEN);
